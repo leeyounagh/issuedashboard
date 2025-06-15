@@ -4,13 +4,7 @@
       <h1>이슈 목록</h1>
 
       <div class="toolbar">
-        <select v-model="selectedStatus" @change="loadIssues">
-          <option value="">전체</option>
-          <option value="PENDING">PENDING</option>
-          <option value="IN_PROGRESS">IN_PROGRESS</option>
-          <option value="COMPLETED">COMPLETED</option>
-          <option value="CANCELLED">CANCELLED</option>
-        </select>
+        <IssueStatusFilter v-model="selectedStatus" @update:modelValue="loadIssues" />
 
         <button class="create-btn" @click="goToCreate">+ 새 이슈 생성</button>
       </div>
@@ -34,6 +28,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { fetchIssues } from '@/shared/api/issues'
 import type { IssueStatus, Issue } from '@/shared/types/issues'
+import IssueStatusFilter from '@/components/IssueStatusFilter.vue'
 
 const issues = ref<Issue[]>([])
 const selectedStatus = ref<IssueStatus | ''>('')
