@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import IssueList from '../pages/IssueList.vue'
-import IssueForm from '../pages/IssueForm.vue'
 
 const routes = [
   {
@@ -10,15 +8,17 @@ const routes = [
   {
     path: '/issues',
     name: 'IssueList',
-    component: IssueList,
+    component: () => import('../pages/IssueList.vue'),
   },
   {
     path: '/issues/new',
-    component: IssueForm,
+    name: 'IssueCreate',
+    component: () => import('../pages/IssueForm.vue'),
   },
   {
     path: '/issues/:id',
-    component: IssueForm,
+    name: 'IssueEdit',
+    component: () => import('../pages/IssueForm.vue'),
   },
 ]
 
